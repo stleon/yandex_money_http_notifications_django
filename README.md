@@ -34,7 +34,7 @@ python manage.py loaddata currencies notification_types
 
 Чтобы протестировать:
 ```
-sudo python managy.py runserver 0.0.0.0:80
+sudo python manage.py runserver 0.0.0.0:80
 ```
 А затем переходите по уже известной ссылке (<https://sp-money.yandex.ru/myservices/online.xml>), нажимаете **Протестировать**. 
 В логе должно быть что-то вроде:
