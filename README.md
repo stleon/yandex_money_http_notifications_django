@@ -24,6 +24,7 @@ url(r'^github_stleon$', 'billing.views.http_notification'),
 надеюсь, вы поняли, куда именно
 - Переходим на <https://sp-money.yandex.ru/myservices/online.xml>, в адрес пишем ``http://вашАйпи/github_stleon``, копируем секрет. Сохраняем.
 - В ``settings.py`` добавляем ``YANDEX_MONEY_SECRET_WORD = 'Ваше секретное слово из предыдущего шага'`` и в **INSTALLED_APPS** - ``billing``
+- В **views.py** укажите название своего проекта, вместо ``yandex_money_http_notifications_django`` (первая строчка)
 
 После всего этого нам надо выполнить:
 ```
