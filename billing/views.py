@@ -19,14 +19,14 @@ def http_notification(request):
 		if request.POST['sha1_hash'] == hashlib.sha1(line_notification_options.encode()).hexdigest():
 			YadTransactions.objects.create(
 				n_type=NotificationTypes.objects.get(notification_type=request.POST['notification_type']),
-				currency=Currencies.objects.get(code=request.POST['currency']),
+				currency=Currencies.objects.get(code=int(request.POST['currency'])),
 				operation_id=request.POST['operation_id'],
 				amount=float(request.POST['amount']),
 				withdraw_amount=float(request.POST['withdraw_amount']) if 'withdraw_amount' in request.POST else 0,
 				datetime_transfer=dateutil.parser.parse(request.POST['datetime']),
-				sender=request.POST['sender'],
+				sender=int(request.POST['sender']),
 				codepro=False if request.POST['codepro'] == 'false' else True,
-				label=request.POST['label'], sha1_hash=request.POST['sha1_hash'],
+				label=request.POST['label'], #sha1_hash=request.POST['sha1_hash'],
 				test_notification=True if 'test_notification' in request.POST else False,
 			)
 			response = HttpResponse(status=200)
