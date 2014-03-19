@@ -20,7 +20,7 @@ class YadTransactions(models.Model):
 	amount = models.FloatField('Сумма операции', max_length=9,)
 	withdraw_amount = models.FloatField('Сумма, которая списана со счета отправителя', max_length=9, null=True, blank=True)
 	datetime_transfer = models.DateTimeField('Дата и время совершения перевода',)
-	sender = models.BigIntegerField('Номер счета отправителя', null=True, blank=True, max_length=20,)
+	sender = models.BigIntegerField('Номер счета отправителя', null=True, blank=True, max_length=33,)
 	codepro = models.BooleanField('Защита кодом протекции')
 	label = models.CharField('Метка платежа', null=True, blank=True, max_length=64,)
 	#sha1_hash = models.CharField('SHA-1 hash параметров уведомления', max_length=40,)
