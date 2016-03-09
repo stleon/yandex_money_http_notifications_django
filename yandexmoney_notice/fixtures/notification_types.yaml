@@ -1,9 +1,0 @@
-- model: yandexmoney_notice.notificationtypes
-  pk: 1
-  fields:
-    notification_type: p2p-incoming
-
-- model: yandexmoney_notice.notificationtypes
-  pk: 2
-  fields:
-    notification_type: card-incoming

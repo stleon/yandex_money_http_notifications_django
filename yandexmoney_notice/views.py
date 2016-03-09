@@ -1,8 +1,6 @@
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
-from .models import NotificationTypes
-from .models import YadTransactions
-from .models import Currencies
+from .models import YadTransaction
 from django.http import HttpResponse
 import dateutil.parser
 import hashlib
@@ -17,9 +15,9 @@ def http_notification(request):
 			request.POST['currency'], request.POST['datetime'], request.POST['sender'], request.POST['codepro'],
 			settings.YANDEX_MONEY_SECRET_WORD, request.POST['label'])
 		if request.POST['sha1_hash'] == hashlib.sha1(line_notification_options.encode()).hexdigest():
-			YadTransactions.objects.create(
-				n_type=NotificationTypes.objects.get(notification_type=request.POST['notification_type']),
-				currency=Currencies.objects.get(code=int(request.POST['currency'])),
+			YadTransaction.objects.create(
+				notification_type=request.POST['notification_type'],
+				currency=int(request.POST['currency']),
 				operation_id=request.POST['operation_id'],
 				amount=request.POST['amount'],
 				withdraw_amount=request.POST['withdraw_amount'] if 'withdraw_amount' in request.POST else 0,

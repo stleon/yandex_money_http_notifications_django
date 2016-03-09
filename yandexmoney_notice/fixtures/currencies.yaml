@@ -1,4 +1,0 @@
-- model: yandexmoney_notice.currencies
-  pk: 1
-  fields:
-    code: 643

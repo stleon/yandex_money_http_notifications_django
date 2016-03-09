@@ -1,21 +1,18 @@
 from django.db import models
 
 
-class NotificationTypes(models.Model):
-    notification_type = models.CharField('Тип перевода', max_length=13, unique=True)
+class YadTransaction(models.Model):
+    class NOTIFICATION_TYPE:
+        P2P = 'p2p-incoming'
+        CARD = 'card-incoming'
 
-    def __str__(self):
-        return self.notification_type
+        CHOICES = (
+            (P2P, 'Перевод из кошелька'),
+            (CARD, 'Перевод с карты'),
+        )
 
-class Currencies(models.Model):
-    code = models.IntegerField('Код валюты счета пользователя. Всегда 643 (рубль РФ согласно ISO 4217).',)
-
-    def __str__(self):
-        return str(self.code)
-
-class YadTransactions(models.Model):
-    n_type = models.ForeignKey(NotificationTypes, related_name='transactions')
-    currency = models.ForeignKey(Currencies, related_name='transactions')
+    notification_type = models.CharField('Тип перевода', max_length=32, choices=NOTIFICATION_TYPE.CHOICES)
+    currency = models.IntegerField('Код валюты счёта пользователя', choices=[(643, 'Рубль РФ')])
     operation_id = models.CharField('Идентификатор операции в истории счета получателя', max_length=50)
     amount = models.DecimalField('Сумма операции', max_digits=12, decimal_places=2)
     withdraw_amount = models.DecimalField('Сумма, которая списана со счета отправителя', max_digits=12, decimal_places=2, null=True, blank=True)
@@ -26,3 +23,6 @@ class YadTransactions(models.Model):
     test_notification = models.BooleanField('Тестовое уведомление')
     date_created = models.DateTimeField('Создано', auto_now_add=True, auto_now=False)
     date_updated = models.DateTimeField('Обновлено', auto_now_add=False, auto_now=True)
+
+    def __str__(self):
+        return self.operation_id

@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import YadTransactions
+from .models import YadTransaction
 
 
 class YadTransactionAdmin(admin.ModelAdmin):
     pass
 
 
-admin.site.register(YadTransactions, YadTransactionAdmin)
+admin.site.register(YadTransaction, YadTransactionAdmin)
