@@ -1,4 +1,0 @@
-- model: billing.currencies
-  pk: 1
-  fields:
-    code: 643
